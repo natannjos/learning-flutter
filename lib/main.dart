@@ -10,7 +10,7 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 56.0, // em pixels
+        height: 56.0, // pixels independente do dispositivo
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         decoration: BoxDecoration(color: Colors.blue[500]),
         // Row é um layout linear horizontal
@@ -24,9 +24,7 @@ class MyAppBar extends StatelessWidget {
             ),
             // Expanded expande seus filhos
             // para preencher o espaço disponível
-            Expanded(
-              child: title,
-            ),
+            Expanded(child: Center(child: title)),
 
             const IconButton(
               icon: Icon(Icons.search),
@@ -49,14 +47,16 @@ class MyScaffold extends StatelessWidget {
         // Column é um layout vertical linear
         child: Column(children: [
       MyAppBar(
-          title: Text('Example title',
+          title: Text('Meu Olá Mundo Modificado',
               style: Theme.of(context).primaryTextTheme.headline6)),
-      const Expanded(child: Center(child: Text('Hello, world!')))
+      const Expanded(child: Center(child: Text('Olá Mundo!!!')))
     ]));
   }
 }
 
 void main() {
+  // Os widgets do material design precisam ficar dentro de um MaterialApp para
+  // aparecerem do jeito correto
   runApp(
       const MaterialApp(title: 'My App', home: SafeArea(child: MyScaffold())));
 }
