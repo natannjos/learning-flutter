@@ -38,14 +38,25 @@ class MyAppBar extends StatelessWidget {
   }
 }
 
+class MyScaffold extends StatelessWidget {
+  const MyScaffold({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Material é um pedaço de papel
+    // conceitual no qual a UI aparece
+    return Material(
+        // Column é um layout vertical linear
+        child: Column(children: [
+      MyAppBar(
+          title: Text('Example title',
+              style: Theme.of(context).primaryTextTheme.headline6)),
+      const Expanded(child: Center(child: Text('Hello, world!')))
+    ]));
+  }
+}
+
 void main() {
-  // A função runApp torna o Widget a raiz da árvore.
-  // No caso abaixo existem dois Widgets: Center e seu filho Text.
-  // O framework força o widget raiz a cobrir a tela
-  runApp(const Center(
-    child: Text(
-      'Hello World!',
-      textDirection: TextDirection.ltr,
-    ),
-  ));
+  runApp(
+      const MaterialApp(title: 'My App', home: SafeArea(child: MyScaffold())));
 }
