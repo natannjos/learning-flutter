@@ -46,9 +46,7 @@ class MyScaffold extends StatelessWidget {
     return Material(
         // Column é um layout vertical linear
         child: Column(children: [
-      MyAppBar(
-          title: Text('Meu Olá Mundo Modificado',
-              style: Theme.of(context).primaryTextTheme.headline6)),
+      MyAppBar(title: Text('Meu Olá Mundo Modificado', style: Theme.of(context).primaryTextTheme.headline6)),
       const Expanded(child: Center(child: Text('Olá Mundo!!!')))
     ]));
   }
@@ -57,6 +55,5 @@ class MyScaffold extends StatelessWidget {
 void main() {
   // Os widgets do material design precisam ficar dentro de um MaterialApp para
   // aparecerem do jeito correto
-  runApp(
-      const MaterialApp(title: 'My App', home: SafeArea(child: MyScaffold())));
+  runApp(const MaterialApp(title: 'My App', home: SafeArea(child: MyScaffold())));
 }
