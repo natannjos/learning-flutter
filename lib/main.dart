@@ -18,7 +18,7 @@ class TutorialHome extends StatelessWidget {
           icon: Icon(Icons.menu),
           tooltip: 'Menu de Navegação',
         ),
-        title: const Text('Título de Exemplo'),
+        title: Text('Título de Exemplo'),
         actions: const [
           IconButton(
             onPressed: null,
