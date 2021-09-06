@@ -45,3 +45,17 @@ class ShoppingListItem extends StatelessWidget {
         title: Text(product.name, style: _getTextStyle(context)));
   }
 }
+
+void main() {
+  runApp(MaterialApp(
+    home: Scaffold(
+      body: Center(
+        child: ShoppingListItem(
+          product: const Product(name: 'Chips'),
+          inCart: true,
+          onCartChanged: (product, inCart) {},
+        ),
+      ),
+    ),
+  ));
+}
