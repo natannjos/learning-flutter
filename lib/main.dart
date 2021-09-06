@@ -33,4 +33,15 @@ class ShoppingListItem extends StatelessWidget {
     return const TextStyle(
         color: Colors.black54, decoration: TextDecoration.lineThrough);
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+        onTap: () {
+          onCartChanged(product, inCart);
+        },
+        leading: CircleAvatar(
+            backgroundColor: _getColor(context), child: Text(product.name[0])),
+        title: Text(product.name, style: _getTextStyle(context)));
+  }
 }
