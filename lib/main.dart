@@ -1,40 +1,43 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MaterialApp(title: 'Tutorial de Flutter', home: TutorialHome()));
+class Counter extends StatefulWidget {
+  const Counter({Key? key}) : super(key: key);
+  @override
+  _CounterState createState() => _CounterState();
 }
 
-class TutorialHome extends StatelessWidget {
-  const TutorialHome({Key? key}) : super(key: key);
+class _CounterState extends State<Counter> {
+  int _counter = 0;
+
+  void _increment() {
+    setState(() {
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     // Scaffold é um layout para
     // a maioria dos Componentes Material
-    return Scaffold(
-      appBar: AppBar(
-        leading: const IconButton(
-          onPressed: null,
-          icon: Icon(Icons.menu),
-          tooltip: 'Menu de Navegação',
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        ElevatedButton(onPressed: _increment, child: const Text('Add')),
+        const SizedBox(
+          width: 16,
         ),
-        title: Text('Título de Exemplo'),
-        actions: const [
-          IconButton(
-            onPressed: null,
-            icon: Icon(Icons.search),
-            tooltip: 'Search',
-          )
-        ],
-      ),
-      body: const Center(
-        child: Text('Texto do Contador'),
-      ),
-      floatingActionButton: const FloatingActionButton(
-        onPressed: null,
-        child: Icon(Icons.add),
-        tooltip: 'Add',
-      ),
+        Text('Contador: $_counter')
+      ],
     );
   }
+}
+
+void main() {
+  runApp(const MaterialApp(
+    home: Scaffold(
+      body: Center(
+        child: Counter(),
+      ),
+    ),
+  ));
 }
