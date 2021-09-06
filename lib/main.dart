@@ -36,13 +36,18 @@ class ShoppingListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-        onTap: () {
-          onCartChanged(product, inCart);
-        },
-        leading: CircleAvatar(
-            backgroundColor: _getColor(context), child: Text(product.name[0])),
-        title: Text(product.name, style: _getTextStyle(context)));
+    return CheckboxListTile(
+      onChanged: (bool) {
+        onCartChanged(product, inCart);
+      },
+      value: inCart,
+      controlAffinity: ListTileControlAffinity.leading,
+      dense: true,
+      title: Text(
+        product.name,
+        style: _getTextStyle(context),
+      ),
+    );
   }
 }
 
