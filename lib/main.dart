@@ -27,4 +27,10 @@ class ShoppingListItem extends StatelessWidget {
 
     return inCart ? Colors.black54 : Theme.of(context).primaryColor;
   }
+
+  TextStyle? _getTextStyle(BuildContext context) {
+    if (!inCart) return null;
+    return const TextStyle(
+        color: Colors.black54, decoration: TextDecoration.lineThrough);
+  }
 }
