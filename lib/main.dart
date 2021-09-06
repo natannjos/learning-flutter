@@ -1,66 +1,30 @@
 import 'package:flutter/material.dart';
 
-class CounterIncrementor extends StatelessWidget {
-  const CounterIncrementor({required this.onPressed, Key? key})
-      : super(key: key);
-
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: onPressed, child: const Text('Add'));
-  }
+class Product {
+  const Product({required this.name});
+  final String name;
 }
 
-class CounterDisplay extends StatelessWidget {
-  const CounterDisplay({required this.counter, Key? key}) : super(key: key);
-  final int counter;
-  @override
-  Widget build(BuildContext contextn) {
-    return Text('Contador: $counter');
+typedef CartChangeCalback = Function(Product product, bool inCart);
+
+class ShoppingListItem extends StatelessWidget {
+  ShoppingListItem(
+      // Este é apenas um construtor do widget
+      {required this.product,
+      required this.inCart,
+      required this.onCartChanged})
+      : super(key: ObjectKey(product));
+
+  final Product product;
+  final bool inCart;
+  final CartChangeCalback onCartChanged;
+
+  Color _getColor(BuildContext context) {
+    // O tema depende do BuildContext pois diferentes
+    // partes da árvore podem ter temas diferentes.
+    // o BuildContext indica onde o build está
+    // indicando assim qual tema usar
+
+    return inCart ? Colors.black54 : Theme.of(context).primaryColor;
   }
-}
-
-class Counter extends StatefulWidget {
-  const Counter({Key? key}) : super(key: key);
-  @override
-  _CounterState createState() => _CounterState();
-}
-
-class _CounterState extends State<Counter> {
-  int _counter = 0;
-
-  void _increment() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // Scaffold é um layout para
-    // a maioria dos Componentes Material
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        CounterIncrementor(onPressed: _increment),
-        const SizedBox(
-          width: 16,
-        ),
-        CounterDisplay(
-          counter: _counter,
-        )
-      ],
-    );
-  }
-}
-
-void main() {
-  runApp(const MaterialApp(
-    home: Scaffold(
-      body: Center(
-        child: Counter(),
-      ),
-    ),
-  ));
 }
