@@ -29,9 +29,12 @@ class ShoppingListItem extends StatelessWidget {
   }
 
   TextStyle? _getTextStyle(BuildContext context) {
-    if (!inCart) return null;
+    const double fontSize = 20.0;
+    if (!inCart) return const TextStyle(fontSize: fontSize);
     return const TextStyle(
-        color: Colors.black54, decoration: TextDecoration.lineThrough);
+        color: Colors.black54,
+        fontSize: fontSize,
+        decoration: TextDecoration.lineThrough);
   }
 
   @override
