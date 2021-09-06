@@ -46,16 +46,57 @@ class ShoppingListItem extends StatelessWidget {
   }
 }
 
+class ShoppingList extends StatefulWidget {
+  const ShoppingList({required this.products, Key? key}) : super(key: key);
+
+  final List<Product> products;
+
+  @override
+  _ShoppingListState createState() => _ShoppingListState();
+}
+
+class _ShoppingListState extends State<ShoppingList> {
+  final _shoppingCart = <Product>{};
+
+  void _handleCartChanged(Product product, bool inCart) {
+    setState(() {
+      // Quando um usuario muda o que está no carrinho, é preciso
+      // mudar o _shoppingCart dentro de uma chamada setState()
+      // para rodar o rebuild.
+      // O framework chama o build abaixo
+      // que atualiza a aparência do app.
+
+      if (!inCart) {
+        _shoppingCart.add(product);
+      } else {
+        _shoppingCart.remove(product);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Lista de Compras')),
+      body: ListView(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          children: widget.products.map((Product product) {
+            return ShoppingListItem(
+                product: product,
+                inCart: _shoppingCart.contains(product),
+                onCartChanged: _handleCartChanged);
+          }).toList()),
+    );
+  }
+}
+
 void main() {
-  runApp(MaterialApp(
-    home: Scaffold(
-      body: Center(
-        child: ShoppingListItem(
-          product: const Product(name: 'Chips'),
-          inCart: true,
-          onCartChanged: (product, inCart) {},
-        ),
-      ),
-    ),
+  runApp(const MaterialApp(
+    title: 'App de Compras',
+    home: ShoppingList(products: [
+      Product(name: 'Ovos'),
+      Product(name: 'Leite'),
+      Product(name: 'Chocolate')
+    ]),
   ));
 }
